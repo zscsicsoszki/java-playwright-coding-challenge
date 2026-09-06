@@ -1,0 +1,68 @@
+package com.playwright.code.challenge.factory;
+
+import com.microsoft.playwright.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
+public class DriverFactory {
+
+    private Playwright playwright;
+    private Browser browser;
+    private BrowserContext browserContext;
+
+    @Value("${browserName:chrome}")
+    private String browserName;
+    @Value("${headless:true}")
+    private boolean headless;
+
+    public void initializeBrowser() {
+        playwright = Playwright.create();
+        if (browser == null) {
+            switch (browserName.toLowerCase()) {
+                case "chromium":
+                case "chrome":
+                    browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(headless));
+                    break;
+                case "firefox":
+                    browser = playwright.firefox().launch(new BrowserType.LaunchOptions().setHeadless(headless));
+                    break;
+                case "webkit":
+                case "safari":
+                    browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(headless));
+                    break;
+                default:
+                    throw new IllegalArgumentException("Please provide a valid browser name (chrome, firefox, webkit or chromium).");
+            }
+        }
+//        browserContext = browser.newContext();
+//
+//        return browserContext.newPage();
+    }
+
+    public BrowserContext createBrowserContext() {
+        initializeBrowser();
+        return browser.newContext();
+    }
+
+    public void closeBrowserContext() {
+        if (browserContext != null) {
+            browserContext.close();
+            browserContext = null;
+        }
+    }
+
+    public void closeBrowser() {
+        closeBrowserContext();
+
+        if (browser != null) {
+            browser.close();
+            browser = null;
+        }
+
+        if (playwright != null) {
+            playwright.close();
+            playwright = null;
+        }
+    }
+}
