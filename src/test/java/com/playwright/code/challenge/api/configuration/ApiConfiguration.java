@@ -17,7 +17,7 @@ public class ApiConfiguration {
 
         return playwright.request().newContext(
                 new APIRequest.NewContextOptions()
-                        .setBaseURL("https://task.site")
+                        .setBaseURL("https://task.site/")
                         .setExtraHTTPHeaders(Map.of(
                                 "Content-Type", "application/json",
                                 "Accept", "application/json"
