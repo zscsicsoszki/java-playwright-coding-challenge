@@ -116,6 +116,29 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>ui-tests</id>
+            <properties>
+                <cucumber.filter.tags>@ui-automation and not @ignore</cucumber.filter.tags>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>api-tests</id>
+            <properties>
+                <cucumber.filter.tags>@api-automation and not @ignore</cucumber.filter.tags>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>all-tests</id>
+            <properties>
+                <cucumber.filter.tags>@ui-automation or @api-automation and not @ignore</cucumber.filter.tags>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>

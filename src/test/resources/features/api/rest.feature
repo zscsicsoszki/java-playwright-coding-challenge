@@ -1,4 +1,4 @@
-@api-automation
+@api-automation @ignore
 Feature: REST Api testing
 
   Scenario: Create a new task

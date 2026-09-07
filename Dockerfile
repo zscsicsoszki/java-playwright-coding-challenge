@@ -1,14 +1,15 @@
-FROM maven:3.9.11-eclipse-temurin-21
+FROM mcr.microsoft.com/playwright/java:v1.56.0-noble
 
 WORKDIR /app
 
-# Copy Maven descriptor first for dependency caching
+# Copy Maven descriptor first
 COPY pom.xml .
 
+# Download dependencies
 RUN mvn dependency:go-offline
 
-# Copy project sources
-COPY src ./src
+# Copy project
+COPY . .
 
-# Execute automated tests
-CMD ["mvn", "clean", "install", "-Dheadless=true"]
+# Execute UI tests
+CMD ["mvn", "clean", "install", "-Pui-tests", "-Dheadless=true"]
