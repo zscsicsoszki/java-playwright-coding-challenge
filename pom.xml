@@ -123,19 +123,20 @@
                 <cucumber.filter.tags>@ui-automation and not @ignore</cucumber.filter.tags>
             </properties>
         </profile>
-
         <profile>
             <id>api-tests</id>
             <properties>
                 <cucumber.filter.tags>@api-automation and not @ignore</cucumber.filter.tags>
             </properties>
         </profile>
-
         <profile>
             <id>all-tests</id>
             <properties>
-                <cucumber.filter.tags>@ui-automation or @api-automation and not @ignore</cucumber.filter.tags>
+                <cucumber.filter.tags>(@ui-automation or @api-automation) and not @ignore</cucumber.filter.tags>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
 
@@ -161,6 +162,11 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <cucumber.filter.tags>${cucumber.filter.tags}</cucumber.filter.tags>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
         </plugins>
     </build>

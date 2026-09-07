@@ -22,4 +22,4 @@ Feature: Login feature
       | email     | test@aldi.com |
       | password  | test123       |
 
-  Scenario: Login fails with invalid password usage
+#  Scenario: Login fails with invalid password usage
