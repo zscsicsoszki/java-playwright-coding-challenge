@@ -35,14 +35,12 @@ public class DriverFactory {
                     throw new IllegalArgumentException("Please provide a valid browser name (chrome, firefox, webkit or chromium).");
             }
         }
-//        browserContext = browser.newContext();
-//
-//        return browserContext.newPage();
     }
 
     public BrowserContext createBrowserContext() {
         initializeBrowser();
-        return browser.newContext();
+        browserContext = browser.newContext();
+        return browserContext;
     }
 
     public void closeBrowserContext() {

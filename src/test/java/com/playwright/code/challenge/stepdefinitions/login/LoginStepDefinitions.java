@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 public class LoginStepDefinitions {
@@ -53,9 +54,15 @@ public class LoginStepDefinitions {
         loginPage.isDisabledLoginButtonVisible();
     }
 
-    // Dummy step for challenge, does not reflect actual behavior
+    // Dummy steps for challenge, does not reflect actual behavior
     @Then("the user is logged in")
     public void theUserIsLoggedIn() {
         assertThat(loginPage.getCurrentUrl(), is(baseUrl));
+    }
+
+    @Then("the login error message is visible with text: {string}")
+    public void theLoginErrorMessageIsVisible(String errorMessage) {
+        loginPage.isLoginErrorMessageVisible();
+        assertThat(loginPage.getLoginErrorMessage(), containsString(errorMessage));
     }
 }

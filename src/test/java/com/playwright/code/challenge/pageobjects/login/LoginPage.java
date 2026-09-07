@@ -19,6 +19,7 @@ public class LoginPage extends BasePageObject {
     protected final Locator disabledLoginButton;
     protected final Locator forgotPasswordLink;
     protected final Locator registerLink;
+    protected final Locator loginErrorMessage;
 
     @Autowired
     public LoginPage(Page page) {
@@ -30,6 +31,7 @@ public class LoginPage extends BasePageObject {
         disabledLoginButton = page.locator("button[aria-label=\"Log In\"][aria-disabled=true]");
         forgotPasswordLink = page.locator("a[aria-label=\"Forgot your password?\"]");
         registerLink = page.locator("a[aria-label=\"Don't have an account? Register here!\"]");
+        loginErrorMessage = page.locator(".cus_login_fail_err span.reset-link");
     }
 
     // Actions + Clicking
@@ -64,6 +66,10 @@ public class LoginPage extends BasePageObject {
         loginButton.click();
     }
 
+    public String getLoginErrorMessage() {
+        return loginErrorMessage.innerText();
+    }
+
     // Visibility
 
     public void isEmailInputFieldVisible() {
@@ -88,6 +94,10 @@ public class LoginPage extends BasePageObject {
 
     public void isRegisterLinkVisible() {
         registerLink.isVisible();
+    }
+
+    public void isLoginErrorMessageVisible() {
+        loginErrorMessage.isVisible();
     }
 
     public void isLoginPageVisible() {
