@@ -16,12 +16,19 @@ jobs:
       - name: Build Docker image
         run: docker build -t playwright-automation .
 
+      - name: Create container
+        run: docker create --name automation-tests playwright-automation
+
       - name: Run automated tests
-        run: |
-          mkdir -p target
-          docker run --rm \
-            -v ${{ github.workspace }}/target:/app/target \
-            playwright-automation
+        run: docker start -a automation-tests
+
+      - name: Copy test artifacts
+        if: always()
+        run: docker cp automation-tests:/app/target ./target
+
+      - name: Remove container
+        if: always()
+        run: docker rm automation-tests
 
       - name: Upload Cucumber reports
         if: always()
