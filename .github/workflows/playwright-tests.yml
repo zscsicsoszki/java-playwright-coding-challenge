@@ -1,0 +1,28 @@
+name: UI & API Automation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  automation-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t playwright-automation .
+
+      - name: Run automated tests
+        run: docker run --rm playwright-automation
+
+      - name: Upload Cucumber reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-reports
+          path: |
+            target/cucumber-pretty.html
