@@ -18,10 +18,9 @@
         <junit-platform-suite.version>1.14.3</junit-platform-suite.version>
         <lombok.version>1.18.42</lombok.version>
         <logback.version>1.6.3</logback.version>
-        <jsonpath.version>2.10.0</jsonpath.version>
         <spring.version>6.2.12</spring.version>
         <hamcrest.version>3.0</hamcrest.version>
-        <allure.version>2.29.1</allure.version>
+        <jackson.datatype.version>2.19.2</jackson.datatype.version>
 
         <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
         <maven.failsafe.plugin.version>3.5.4</maven.failsafe.plugin.version>
@@ -82,16 +81,6 @@
             <version>${logback.version}</version>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <version>${jsonpath.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
@@ -104,15 +93,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber7-jvm</artifactId>
-            <version>${allure.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jdk8</artifactId>
-            <version>2.19.2</version>
+            <version>${jackson.datatype.version}</version>
         </dependency>
     </dependencies>
 
